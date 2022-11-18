@@ -2,6 +2,7 @@ import { Any, MongoService, FileService, HttpService, AlertService } from 'wacom
 import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root'
@@ -21,6 +22,7 @@ export class UserService {
 		private file: FileService,
 		private router: Router
 	) {
+		this.http.setUrl(environment.url);
 		this.file.add({
 			id: 'userAvatarUrl',
 			resize: 256,
