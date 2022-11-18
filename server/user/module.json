@@ -17,6 +17,7 @@
 		"bcrypt-nodejs": "*",
 		"nodemailer": "*",
 		"njwt": "*",
-		"uuid": "*"
+		"uuid": "*",
+		"cors": "*"
 	}
 }

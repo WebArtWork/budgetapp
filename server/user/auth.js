@@ -3,7 +3,10 @@ const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 const nJwt = require('njwt');
 const fs = require('fs');
+const cors = require('cors');
+
 module.exports = async function (waw) {
+	waw.app.use(cors());
 	if (!waw.config.signingKey) {
 		waw.config.signingKey = uuidv4();
 		let serverJson = waw.readJson(process.cwd() + '/server.json');
