@@ -1,0 +1,35 @@
+<label>
+	<input
+		type="text"
+		[(ngModel)]="wallet.name"
+		placeholder="Wallet Name"
+		(ngModelChange)="ws.update(wallet)"
+	/>
+</label>
+
+<label>
+	<textarea
+		type="text"
+		[(ngModel)]="wallet.description"
+		(ngModelChange)="ws.update(wallet);"
+	></textarea>
+</label>
+
+<div>Balance: {{wallet.balance}}</div>
+
+<div>
+	<label>
+		<input type="text" [(ngModel)]="transaction.name" placeholder="title"/>
+	</label>
+
+	<label>
+		<input type="number" [(ngModel)]="transaction.amount "/>
+	</label>
+
+	<button (click)="create()">Create Transaction</button>
+</div>
+
+<div *ngFor="let transaction of ts.transactions">
+	<span>{{transaction.name}}: </span>
+	<span>{{transaction.amount}}</span>
+</div>

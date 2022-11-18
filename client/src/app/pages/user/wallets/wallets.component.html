@@ -1,0 +1,9 @@
+<div style="padding: 20px">
+	<button (click)="ws.create()">Create Wallet</button>
+
+	<h1>Wallets:</h1>
+
+	<div *ngFor="let wallet of ws.wallets" routerLink="/wallet/{{wallet._id}}">
+		<span>{{wallet.name || 'New Wallet'}}</span>
+	</div>
+</div>
