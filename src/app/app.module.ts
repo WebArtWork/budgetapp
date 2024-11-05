@@ -1,21 +1,18 @@
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Renderer2 } from '@angular/core';
+import { NgModule } from '@angular/core';
 // Core
 import { GuestComponent } from './core/theme/guest/guest.component';
 import { UserComponent } from './core/theme/user/user.component';
 import { AppComponent } from './app.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
 // config
 import { WacomModule, MetaGuard } from 'wacom';
 import { environment } from 'src/environments/environment';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 import { GuestGuard } from './core/guards/guest.guard';
 import { AdminsGuard } from './core/guards/admins.guard';
-import { AlertModule } from './modules/alert/alert.module';
-import { ModalModule } from './modules/modal/modal.module';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const routes: Routes = [
@@ -30,6 +27,32 @@ const routes: Routes = [
 		component: GuestComponent,
 		children: [
 			/* guest */
+			{
+				path: 'components',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Components'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/guest/components/components.module').then(
+						(m) => m.ComponentsModule
+					)
+			},
+			{
+				path: 'test',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'test'
+					}
+				},
+				loadChildren: () =>
+					import('./pages/guest/test/test.module').then(
+						(m) => m.TestModule
+					)
+			},
 			{
 				path: 'sign',
 				canActivate: [MetaGuard],
@@ -52,16 +75,6 @@ const routes: Routes = [
 		children: [
 			/* user */
 			{
-				path: 'dashboard',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Dashboard'
-					}
-				},
-				loadChildren: () => import('./pages/user/dashboard/dashboard.module').then(m => m.DashboardModule)
-			}, 
-			{
 				path: 'profile',
 				canActivate: [MetaGuard],
 				data: {
@@ -72,45 +85,6 @@ const routes: Routes = [
 				loadChildren: () =>
 					import('./pages/user/profile/profile.module').then(
 						(m) => m.ProfileModule
-					)
-			},
-			{
-				path: 'budgets',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'My Budgets'
-					}
-				},
-				loadChildren: () =>
-					import('./modules/budget/pages/budgets/budgets.module').then(
-						(m) => m.BudgetsModule
-					)
-			},
-			{
-				path: 'transactions',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'My Transactions'
-					}
-				},
-				loadChildren: () =>
-					import('./modules/budgettransaction/pages/transactions/transactions.module').then(
-						(m) => m.TransactionsModule
-					)
-			},
-			{
-				path: 'shares',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'My Shares'
-					}
-				},
-				loadChildren: () =>
-					import('./modules/budgetshare/pages/shares/shares.module').then(
-						(m) => m.SharesModule
 					)
 			}
 		]
@@ -143,9 +117,9 @@ const routes: Routes = [
 					}
 				},
 				loadChildren: () =>
-					import('./modules/form/pages/forms/forms.module').then(
-						(m) => m.FormsModule
-					)
+					import(
+						'./modules/customform/pages/customforms/customforms.module'
+					).then((m) => m.CustomformsModule)
 			},
 			{
 				path: 'translates',
@@ -157,7 +131,7 @@ const routes: Routes = [
 				},
 				loadChildren: () =>
 					import(
-						'./modules/translate/pages/translates/translates.module'
+						'./core/modules/translate/pages/translates/translates.module'
 					).then((m) => m.TranslatesModule)
 			}
 		]
@@ -172,11 +146,8 @@ const routes: Routes = [
 @NgModule({
 	declarations: [AppComponent, GuestComponent, UserComponent],
 	imports: [
-		AlertModule,
-		ModalModule,
 		CoreModule,
 		BrowserModule,
-		ReactiveFormsModule,
 		BrowserAnimationsModule,
 		WacomModule.forRoot({
 			store: {},
@@ -195,6 +166,21 @@ const routes: Routes = [
 			modal: {
 				modals: {
 					/* modals */
+				}
+			},
+			alert: {
+				alerts: {
+					/* alerts */
+				}
+			},
+			loader: {
+				loaders: {
+					/* loaders */
+				}
+			},
+			popup: {
+				popups: {
+					/* popups */
 				}
 			}
 		}),

@@ -1,4 +1,6 @@
 export const environment = {
+	roles: [],
 	production: true,
-	url: 'https://webart.work'
+	appId: 'test',
+	url: 'https:/webart.work'
 };

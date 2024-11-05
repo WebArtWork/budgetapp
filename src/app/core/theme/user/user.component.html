@@ -5,10 +5,10 @@
 				<a
 					routerLinkActive="_activeLink"
 					(click)="showSidebar = false"
-					routerLink="/dashboard"
+					routerLink="/profile"
 					class="nav__a"
 				>
-					<span class="material-icons">bar_chart</span>
+					<span class="material-icons">home</span>
 				</a>
 			</li>
 			<li class="nav__li _burger" (click)="showSidebar = !showSidebar">
@@ -88,50 +88,6 @@
 					<span translate>Theme.Translates</span>
 				</a>
 				<hr *ngIf="us.role('admin')" />
-				<a
-					[routerLinkActiveOptions]="{ exact: true }"
-					routerLinkActive="_activeLink"
-					routerLink="/budgets"
-					class="nav__burger-link"
-					*ngIf="us.role('admin')"
-					(click)="hideSidebar()"
-				>
-					<span class="material-icons">account_balance</span>
-					<span translate>Theme.Budgets</span>
-				</a>
-				<a
-					[routerLinkActiveOptions]="{ exact: true }"
-					routerLinkActive="_activeLink"
-					routerLink="/transactions"
-					class="nav__burger-link"
-					*ngIf="us.role('admin')"
-					(click)="hideSidebar()"
-				>
-					<span class="material-icons">swap_horiz</span>
-					<span translate>Theme.Transactions</span>
-				</a>
-				<a
-					[routerLinkActiveOptions]="{ exact: true }"
-					routerLinkActive="_activeLink"
-					routerLink="/shares"
-					class="nav__burger-link"
-					*ngIf="us.role('admin')"
-					(click)="hideSidebar()"
-				>
-					<span class="material-icons">pie_chart</span>
-					<span translate>Theme.Shares</span>
-				</a>
-				<a
-					[routerLinkActiveOptions]="{ exact: true }"
-					routerLinkActive="_activeLink"
-					routerLink="/items"
-					class="nav__burger-link"
-					*ngIf="us.role('admin')"
-					(click)="hideSidebar()"
-				>
-					<span class="material-icons">inventory</span>
-					<span translate>Theme.Items</span>
-				</a>
 			</div>
 		</div>
 		<router-outlet></router-outlet>
